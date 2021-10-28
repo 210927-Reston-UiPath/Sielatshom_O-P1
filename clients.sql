@@ -18,14 +18,6 @@ create table shoppingList (
     clientId int references clients(id)
 );
 
-create table shoppingExpense (
-    lineItemId int identity(1,1) primary key,
-    orderId int references orderList(orderId),
-    id int references shoppingList(itemId),
-    price numeric not null,
-    subtotal numeric not null
-);
-
 create table orderList (   
     orderId int identity(1,1) primary key,
     clientId int references clients(id),
@@ -33,10 +25,19 @@ create table orderList (
     total numeric
 );
 
-/* create table addresse(
-    streetAddresse varchar(100) not null,
-    zipCode int not null,
-    id int references clients(id)
+create table shoppingList1(
+    itemId int identity(1,1) primary key,
+    itemName varchar(100) not null,
+    quantity int not null,
+    clientId int references clients(id)
+); 
+
+/* create table shoppingExpense (
+    lineItemId int identity(1,1) primary key,
+    orderId int references orderList(orderId),
+    id int references shoppingList(itemId),
+    price numeric not null,
+    subtotal numeric not null
 ); */
 
 
@@ -50,10 +51,13 @@ insert into clients (firstName, lastName, addresse, zipCode, areaCode, phoneNumb
 ('Daniel', 'Alves', '15 rue', 7890, 123, 6652876,'daniel.alves@gmail.com');
 
 insert into shoppingList (itemName, quantity, clientId) values
-('Chai', 2, 1), ('Chang', 6, 1), ('Latour Pouilly Fuisse', 2, 1), ('Chartreuse verte', 1, 2), ('Cote de Blaye', 2, 2), 
-('Sasquatch Ale', 3, 3), ('Montet Sauvignon Blanc', 2, 3),
-('Steeleye Stout', 1, 4),  ('Chai', 2, 4), ('Halos de Jupiter Cotes du Rhone, 2018', 3, 4), 
-('Laughing Lumberjack Lager', 2, 5), ('Outback Lager', 2, 5), ('Macon Lugny Les Charmes', 3, 5);
+('Chai', 2, 1), ('Chang', 6, 1), ('Chartreuse verte', 1, 2), ('Cote de Blaye', 2, 2), 
+('Sasquatch Ale', 3, 3), ('Steeleye Stout', 1, 4), ('Chai', 2, 4), 
+('Laughing Lumberjack Lager', 2, 5), ('Outback Lager', 2, 5);
+
+insert into shoppingList1 (itemName, quantity, clientId) values
+('Halos de Jupiter Cotes du Rhone, 2018', 2, 1), ('Macon Lugny Les Charmes', 2, 2),('Montet Sauvignon Blanc', 2, 3),
+('Latour Pouilly Fuisse', 3, 4);
 
 insert into orderList (clientId) values
 (1), (2), (3), (4), (5); 
@@ -63,17 +67,24 @@ insert into orderList (clientId) values
 
 select * from clients;
 select * from shoppingList;
+select * from shoppingList1;
 select * from orderList;
 select * from shoppingExpense;
 
 delete from orderList;
 delete from shoppingList;
+delete from shoppingList1;
 delete from shoppingExpense;
 
 drop table clients;
 drop table shoppingList;
+drop table shoppingList1;
 drop table orderList;
 drop table shoppingExpense;
+
+delete from shoppingList
+where shoppingList.clientId = 1
+and itemName = 'Chang';
 
 update shoppingList
 set itemName = 'Laughing Lumberjack Lager'
@@ -93,8 +104,7 @@ from clients
 inner join shoppingList
 on clients.id = shoppingList.clientId;
 
-delete from clients
-where clients.id = 8;
+
 
 
 

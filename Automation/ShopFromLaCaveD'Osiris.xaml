@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ReadFromPega" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="855,2612" sap2010:WorkflowViewState.IdRef="ReadFromPega_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ReadFromPega" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1059,3286" sap2010:WorkflowViewState.IdRef="ReadFromPega_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="41">
       <x:String>System.Activities</x:String>
@@ -45,7 +45,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="25">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="50">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -71,9 +71,10 @@
       <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="GSequence" sap:VirtualizedContainerService.HintSize="1069,3470" sap2010:WorkflowViewState.IdRef="Sequence_7">
+  <Sequence DisplayName="GSequence" sap:VirtualizedContainerService.HintSize="1069,3221" sap2010:WorkflowViewState.IdRef="Sequence_7">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="qryDatatable" />
       <Variable x:TypeArguments="sd:DataTable" Name="dbsqlDatabase" />
@@ -97,24 +98,24 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:DatabaseConnect>
-    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[qryDatatable]" DisplayName="Execute Query" ExistingDbConnection="[dbSql]" sap:VirtualizedContainerService.HintSize="1027,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="select *&#xD;&#xA;from clients&#xD;&#xA;inner join shoppingList on clients.id = shoppingList.clientId&#xD;&#xA;inner join orderList on shoppingList.clientId = orderList.clientId;">
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[qryDatatable]" DisplayName="Execute Query" ExistingDbConnection="[dbSql]" sap:VirtualizedContainerService.HintSize="1027,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="select *&#xD;&#xA;from shoppingList1, orderList&#xD;&#xA;where shoppingList1.clientId = orderList.clientId;">
       <ui:ExecuteQuery.Parameters>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:ExecuteQuery.Parameters>
     </ui:ExecuteQuery>
-    <Sequence DisplayName="Data Scraping" sap:VirtualizedContainerService.HintSize="1027,3091" sap2010:WorkflowViewState.IdRef="Sequence_9">
+    <Sequence DisplayName="Data Scraping" sap:VirtualizedContainerService.HintSize="1027,2842" sap2010:WorkflowViewState.IdRef="Sequence_9">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="985,2999" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="https://veetchy.z13.web.core.windows.net/">
+      <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="985,2750" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="https://veetchy.z13.web.core.windows.net/">
         <ui:OpenBrowser.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="951,2897" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="951,2648" sap2010:WorkflowViewState.IdRef="Sequence_8">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -145,13 +146,13 @@
                   <InArgument x:TypeArguments="x:String">[date.Today.ToString("mm/DD/yyyy")]</InArgument>
                 </Assign.Value>
               </Assign>
-              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[qryDatatable]" DisplayName="For Each Row for clients" sap:VirtualizedContainerService.HintSize="909,2459" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[qryDatatable]" DisplayName="For Each Row for clients" sap:VirtualizedContainerService.HintSize="909,2210" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
                 <ui:ForEachRow.Body>
                   <ActivityAction x:TypeArguments="sd:DataRow">
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="sd:DataRow" Name="client" />
                     </ActivityAction.Argument>
-                    <Sequence sap:VirtualizedContainerService.HintSize="859,2311" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                    <Sequence sap:VirtualizedContainerService.HintSize="859,2062" sap2010:WorkflowViewState.IdRef="Sequence_15">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -181,7 +182,6 @@
                           <InArgument x:TypeArguments="x:Double">0</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <If Condition="[client.rows.count - currIndex = 1]" sap:VirtualizedContainerService.HintSize="817,209" sap2010:WorkflowViewState.IdRef="If_2" />
                       <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[ExtractDataTable]" DisplayName="For Each Row for website items" sap:VirtualizedContainerService.HintSize="817,1670" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
                         <ui:ForEachRow.Body>
                           <ActivityAction x:TypeArguments="sd:DataRow">
@@ -260,8 +260,6 @@
                                         <InArgument x:TypeArguments="x:Double">[qty * price]</InArgument>
                                       </Assign.Value>
                                     </Assign>
-                                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{client(&quot;clientId&quot;), currDate, total}]" DataTable="[qryDatatable]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
-                                    <ui:InsertDataTable AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" DataTable="[qryDatatable]" DisplayName="Insert" ExistingDbConnection="[dbSql]" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="InsertDataTable_2" TableName="orderList" />
                                     <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
                                       <ui:Click.CursorPosition>
                                         <ui:CursorPosition Position="Center">
@@ -314,6 +312,8 @@
                                         <InArgument x:TypeArguments="x:Int32">[currIndex +1]</InArgument>
                                       </Assign.Value>
                                     </Assign>
+                                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{client(&quot;clientId&quot;), currDate, total}]" DataTable="[qryDatatable]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                                    <ui:InsertDataTable AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" DataTable="[qryDatatable]" DisplayName="Insert" ExistingDbConnection="[dbSql]" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="InsertDataTable_2" TableName="orderList" />
                                   </Sequence>
                                 </If.Then>
                                 <If.Else>
