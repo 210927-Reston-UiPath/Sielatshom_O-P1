@@ -50,9 +50,10 @@ insert into clients (firstName, lastName, addresse, zipCode, areaCode, phoneNumb
 ('Daniel', 'Alves', '15 rue', 7890, 123, 6652876,'daniel.alves@gmail.com');
 
 insert into shoppingList (itemName, quantity, clientId) values
-('Chai', 2, 1), ('Chang', 6, 1), ('Ipoh Coffee', 5, 1), ('Chartreuse verte', 1, 2), ('Cote de Blaye', 2, 2), 
-('Sasquatch Ale', 3, 3), ('Outback Lager', 2, 3),  ('Chang', 1, 3), ('Steeleye Stout', 1, 4),  ('Chai', 2, 4),
-('Laughing Lumberjack Lager', 2, 5), ('Outback Lager', 2, 5);
+('Chai', 2, 1), ('Chang', 6, 1), ('Latour Pouilly Fuisse', 2, 1), ('Chartreuse verte', 1, 2), ('Cote de Blaye', 2, 2), 
+('Sasquatch Ale', 3, 3), ('Montet Sauvignon Blanc', 2, 3),
+('Steeleye Stout', 1, 4),  ('Chai', 2, 4), ('Halos de Jupiter Cotes du Rhone, 2018', 3, 4), 
+('Laughing Lumberjack Lager', 2, 5), ('Outback Lager', 2, 5), ('Macon Lugny Les Charmes', 3, 5);
 
 insert into orderList (clientId) values
 (1), (2), (3), (4), (5); 
