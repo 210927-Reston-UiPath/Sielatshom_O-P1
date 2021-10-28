@@ -67,9 +67,15 @@ insert into orderList (clientId) values
 
 select * from clients;
 select * from shoppingList;
-select * from shoppingList1;
 select * from orderList;
-select * from shoppingExpense;
+select * from shoppingList1;
+
+select firstName, itemName, quantity, total
+from clients
+inner join shoppingList on clients.id = shoppingList.clientId
+inner join orderList on shoppingList.clientId = orderList.clientId;
+
+/*****************************************To delete and drop tables**************************************/
 
 delete from orderList;
 delete from shoppingList;
@@ -81,6 +87,9 @@ drop table shoppingList;
 drop table shoppingList1;
 drop table orderList;
 drop table shoppingExpense;
+
+
+/*****************************************Other Queries*********************************************/
 
 delete from shoppingList
 where shoppingList.clientId = 1
@@ -96,11 +105,6 @@ where clients.id =  shoppingList.clientId and orderList.clientId = shoppingList.
 
 select *
 from clients
-inner join shoppingList on clients.id = shoppingList.clientId
-inner join orderList on shoppingList.clientId = orderList.clientId;
-
-select *
-from clients
 inner join shoppingList
 on clients.id = shoppingList.clientId;
 
@@ -111,3 +115,8 @@ on clients.id = shoppingList.clientId;
 /* select * from clients 
 where id = (select max(id) 
 from clients); */
+
+
+select *
+from shoppingList1
+inner join orderList on ShoppingList1.clientid = orderList.clientId;
